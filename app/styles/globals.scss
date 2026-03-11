@@ -1,0 +1,7 @@
+@use "./reset.scss";
+
+body {
+  font-family: var(--font-montserrat);
+  scroll-behavior: smooth;
+  font-weight: 600;
+}

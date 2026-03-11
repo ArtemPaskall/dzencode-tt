@@ -1,0 +1,10 @@
+{
+  "HomePage": {
+    "title": "Hello  world"
+  },
+  "NotFoundPage": {
+    "title": "Page not found",
+    "description": "It seems this page does not exist.",
+    "goHome": "Go to Home"
+  }
+}
