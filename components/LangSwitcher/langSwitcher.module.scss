@@ -1,0 +1,39 @@
+.lang-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+  position: relative;
+}
+
+.lang-wrapp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  position: absolute;
+  top: 0px;
+  right: -45px;
+  background-color: rgba(159, 159, 159, 0.5);
+  padding: 1px 5px;
+  border-radius: 8px;
+  transition: all 0.5s;
+  overflow: hidden;
+  max-height: 24px;
+  font-weight: 500;
+  color: #494949;
+
+  &.open {
+    max-height: 200px;
+  }
+
+  & > div {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  & > div:hover {
+    color: #ffffff;
+  }
+}

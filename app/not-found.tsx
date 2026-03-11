@@ -1,7 +1,7 @@
 import { Montserrat } from "next/font/google";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
 import st from "./styles/not-found.module.scss";
+import { Link } from "@/i18n/navigation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

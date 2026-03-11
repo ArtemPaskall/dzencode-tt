@@ -27,4 +27,15 @@
     color: rgb(103, 126, 240);
     font-weight: 600;
   }
+
+  &__sideNav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__sideNav > div {
+    margin-right: 50px;
+  }
 }
