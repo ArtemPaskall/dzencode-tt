@@ -1,7 +1,26 @@
 @use "./reset.scss";
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-montserrat);
   scroll-behavior: smooth;
   font-weight: 600;
+}
+
+.container {
+  padding: 0px 40px;
+  width: 100%;
+}
+
+.main-wrapp {
+  display: flex;
+  align-items: stretch;
+  min-height: calc(100vh - 100px);
+  height: 100%;
+}
+
+.page-content {
+  padding: 50px 40px;
+  width: 100%;
 }
