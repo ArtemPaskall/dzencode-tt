@@ -5,6 +5,7 @@ import Image from 'next/image'
 import TimeBlock from '@/components/TimeBlock/page'
 import ClientOnly from '../ClientOnly/page'
 import LangSwitcher from '../LangSwitcher/page'
+import ActiveUsers from '../ActiveUsers/page'
 
 export default function TopMenu() {
   return (
@@ -26,6 +27,7 @@ export default function TopMenu() {
             <ClientOnly>
               <TimeBlock />
             </ClientOnly>
+            <ActiveUsers />
           </div>
         </div>
       </div>
