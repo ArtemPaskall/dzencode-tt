@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Home"
+  "Products": {
+    "title": "Products"
+  },
+  "Orders": {
+    "title": "Orders"
+  },
+  "NavMenu": {
+    "Products": "Products",
+    "Orders": "Orders"
   },
   "NotFoundPage": {
     "title": "Page not found",

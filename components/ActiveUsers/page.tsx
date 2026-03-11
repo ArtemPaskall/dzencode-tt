@@ -16,5 +16,5 @@ export default function ActiveUsers() {
     }
   }, [])
 
-  return <span>{users}</span>
+  return <span>{users === null ? '...' : users}</span>
 }

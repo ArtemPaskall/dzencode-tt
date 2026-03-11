@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Головна"
+  "Products": {
+    "title": "Продукти"
+  },
+  "Orders": {
+    "title": "Замовлення"
+  },
+  "NavMenu": {
+    "Products": "Продукти",
+    "Orders": "Замовлення"
   },
   "NotFoundPage": {
     "title": "Сторінку не знайдено",

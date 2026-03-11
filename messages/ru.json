@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Главная"
+  "Products": {
+    "title": "Продукты"
+  },
+  "Orders": {
+    "title": "Приходы"
+  },
+  "NavMenu": {
+    "Products": "Продукты",
+    "Orders": "Приходы"
   },
   "NotFoundPage": {
     "title": "Страница не найдена",
