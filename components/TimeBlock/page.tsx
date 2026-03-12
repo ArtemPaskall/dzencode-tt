@@ -30,7 +30,7 @@ export default function TimeBlock() {
         <div> {formattedDate}</div>
       </div>
       <div className={st.time}>
-        <Image src={'/clock.png'} width={20} height={20} alt={'clock'}></Image>
+        <Image src={'/clock.png'} width={15} height={15} alt={'clock'}></Image>
         <div> {time.toLocaleTimeString(locale)}</div>
       </div>
     </div>

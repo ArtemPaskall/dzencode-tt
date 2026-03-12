@@ -14,7 +14,7 @@ export default function TopMenu() {
         <div className={st.topMenu__wrapp}>
           <Link href={'/'} className={st.topMenu__logoWrapp}>
             <Image
-              src="/fox.jpg"
+              src="/logo.svg"
               height={40}
               width={40}
               alt={'main logo'}
