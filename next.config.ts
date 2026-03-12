@@ -4,10 +4,6 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // TS поки що не знає про allowedDevOrigins
-    allowedDevOrigins: ['https://dzencode-tt-production.up.railway.app'] as any,
-  },
   images: {
     remotePatterns: [
       {
@@ -16,6 +12,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+}
+
+// Для dev можна динамічно додавати allowedDevOrigins через NODE_ENV
+if (process.env.NODE_ENV !== 'production') {
+  ;(nextConfig.experimental as any) = {
+    allowedDevOrigins: ['https://dzencode-tt-production.up.railway.app'],
+  }
 }
 
 export default withNextIntl(nextConfig)
