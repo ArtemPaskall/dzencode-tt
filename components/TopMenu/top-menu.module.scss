@@ -35,7 +35,7 @@
     gap: 30px;
   }
 
-  &__sideNav > div {
+  &__sideNav > div:first-child {
     margin-right: 50px;
   }
 }

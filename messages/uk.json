@@ -9,6 +9,9 @@
     "Products": "Продукти",
     "Orders": "Замовлення"
   },
+  "ActiveConnections": {
+    "Connections": "З'єднання"
+  },
   "NotFoundPage": {
     "title": "Сторінку не знайдено",
     "description": "Схоже, що такої сторінки не існує.",

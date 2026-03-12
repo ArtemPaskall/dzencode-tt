@@ -5,7 +5,7 @@ import Image from 'next/image'
 import TimeBlock from '@/components/TimeBlock/page'
 import ClientOnly from '../ClientOnly/page'
 import LangSwitcher from '../LangSwitcher/page'
-import ActiveUsers from '../ActiveUsers/page'
+import ActiveUsers from '../ActiveConnections/page'
 
 export default function TopMenu() {
   return (

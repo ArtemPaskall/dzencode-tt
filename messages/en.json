@@ -9,6 +9,9 @@
     "Products": "Products",
     "Orders": "Orders"
   },
+  "ActiveConnections": {
+    "Connections": "Connections"
+  },
   "NotFoundPage": {
     "title": "Page not found",
     "description": "It seems this page does not exist.",

@@ -9,6 +9,9 @@
     "Products": "Продукты",
     "Orders": "Приходы"
   },
+  "ActiveConnections": {
+    "Connections": "Соединения"
+  },
   "NotFoundPage": {
     "title": "Страница не найдена",
     "description": "Похоже, что такой страницы не существует.",

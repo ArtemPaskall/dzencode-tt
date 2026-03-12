@@ -1,0 +1,18 @@
+.activeConnections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  &__users {
+    color: rgb(255, 0, 0);
+    font-weight: 600;
+  }
+
+  &__connections {
+    color: rgb(5, 192, 77);
+    font-weight: 500;
+    font-size: 12px;
+  }
+}

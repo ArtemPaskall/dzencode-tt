@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
     users--
     io.emit('users', users)
   })
+
+  socket.on('request-users', () => {
+    socket.emit('users', users)
+  })
 })
 
 server.listen(3000, () => {
