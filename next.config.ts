@@ -14,11 +14,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-// Для dev можна динамічно додавати allowedDevOrigins через NODE_ENV
-if (process.env.NODE_ENV !== 'production') {
-  ;(nextConfig.experimental as any) = {
-    allowedDevOrigins: ['https://dzencode-tt-production.up.railway.app'],
-  }
-}
-
 export default withNextIntl(nextConfig)
