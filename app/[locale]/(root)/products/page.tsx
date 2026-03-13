@@ -10,7 +10,7 @@ export async function generateMetadata() {
 }
 
 export default async function Products() {
-  const t = await getTranslations('Products')
+  // const t = await getTranslations('Products')
 
   return (
     <>
