@@ -17,22 +17,19 @@ const server = createServer((req, res) => {
 const io = new Server(server)
 
 io.on('connection', (socket) => {
-  if (!socket.connectedBefore) {
+  if (socket.conn.transport.name === 'websocket') {
     users++
-    socket.connectedBefore = true
-  }
-  io.emit('users', users)
+    io.emit('users', users)
 
-  socket.on('disconnect', () => {
-    if (socket.connectedBefore) {
+    socket.on('disconnect', () => {
       users--
       io.emit('users', users)
-    }
-  })
+    })
 
-  socket.on('request-users', () => {
-    socket.emit('users', users)
-  })
+    socket.on('request-users', () => {
+      socket.emit('users', users)
+    })
+  }
 })
 
 const PORT = process.env.PORT || 3000
