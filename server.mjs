@@ -17,12 +17,17 @@ const server = createServer((req, res) => {
 const io = new Server(server)
 
 io.on('connection', (socket) => {
-  users++
+  if (!socket.connectedBefore) {
+    users++
+    socket.connectedBefore = true
+  }
   io.emit('users', users)
 
   socket.on('disconnect', () => {
-    users--
-    io.emit('users', users)
+    if (socket.connectedBefore) {
+      users--
+      io.emit('users', users)
+    }
   })
 
   socket.on('request-users', () => {
