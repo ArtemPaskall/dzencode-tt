@@ -1,5 +1,8 @@
-import { getTranslations } from 'next-intl/server'
 import '@/app/styles/globals.scss'
+import st from './orders.module.scss'
+import { Link } from '@/i18n/navigation'
+import { Order } from '@/types'
+import { getTranslations } from 'next-intl/server'
 
 export async function generateMetadata() {
   const t = await getTranslations('Orders')
@@ -9,12 +12,25 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Products() {
-  const t = await getTranslations('Orders')
+export default async function Orders() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/orders`, {
+    cache: 'no-store',
+  })
+
+  if (!res.ok) return <div>Failed to load orders ({res.status})</div>
+
+  const orders: Order[] = await res.json()
 
   return (
-    <>
-      <div>Orders</div>
-    </>
+    <div className={st.productsPage}>
+      <Link href="/products/add-product">Add Order</Link>
+      <div className={st.productsList}>
+        {orders.map((order) => (
+          <div key={order.id} className={st.productItem}>
+            {order.title}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

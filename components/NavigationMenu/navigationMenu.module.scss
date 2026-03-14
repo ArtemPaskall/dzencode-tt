@@ -1,6 +1,8 @@
 .navMenu {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 3;
   gap: 10px;
   width: 200px;
   padding: 20px;

@@ -1,4 +1,4 @@
-@use "./reset.scss";
+@use './reset.scss';
 
 body {
   display: flex;
@@ -22,4 +22,5 @@ body {
 .page-content {
   padding: 50px 40px;
   width: 100%;
+  background-color: #f0f3f5;
 }
