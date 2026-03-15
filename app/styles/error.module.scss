@@ -1,0 +1,33 @@
+.Error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 40px;
+
+  &__resetButton {
+    padding: 15px;
+    background-color: rgb(20, 17, 215);
+    max-width: 200px;
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  &__homeButton {
+    padding: 15px;
+    background-color: rgb(17, 215, 27);
+    max-width: 200px;
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+  }
+}

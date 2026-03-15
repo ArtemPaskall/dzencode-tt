@@ -15,5 +15,10 @@
   "NotFoundPage": {
     "title": "Page not found",
     "description": "It seems this page does not exist."
+  },
+  "ErrorPage": {
+    "title": "Oops! Something went wrong.",
+    "tryAgain": "Try again",
+    "goHome": "Go to home"
   }
 }

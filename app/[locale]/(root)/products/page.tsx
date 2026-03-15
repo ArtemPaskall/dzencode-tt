@@ -45,9 +45,14 @@ export async function generateMetadata() {
 }
 
 export default async function Products() {
-  const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM products')
-  const products: Product[] = rows as Product[]
-  console.log(products)
+  let products: Product[] = []
+
+  try {
+    const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM products')
+    products = rows as Product[]
+  } catch (error: unknown) {
+    throw error
+  }
 
   return (
     <div className={st.productsPage}>
