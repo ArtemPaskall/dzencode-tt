@@ -1,4 +1,3 @@
--- Таблиця ордерів
 CREATE TABLE orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -6,7 +5,6 @@ CREATE TABLE orders (
   date DATETIME
 );
 
--- Таблиця продуктів
 CREATE TABLE products (
   id INT AUTO_INCREMENT PRIMARY KEY,
   serial_number INT NOT NULL UNIQUE,
@@ -21,7 +19,6 @@ CREATE TABLE products (
   date DATETIME
 );
 
--- Проміжна таблиця для M:N зв'язку
 CREATE TABLE order_products (
   order_id INT NOT NULL,
   product_id INT NOT NULL,
