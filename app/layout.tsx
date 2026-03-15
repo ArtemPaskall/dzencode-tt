@@ -1,5 +1,9 @@
+'use client'
+
 import { Montserrat, Inter } from 'next/font/google'
 import './styles/globals.scss'
+import { Provider } from 'react-redux'
+import { store } from '@/redux/store'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -21,7 +25,7 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${montserrat.variable} ${inter.variable}`}>
-        {children}
+        <Provider store={store}>{children}</Provider>
       </body>
     </html>
   )
