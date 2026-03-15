@@ -45,11 +45,13 @@ export async function generateMetadata() {
 }
 
 export default async function Products() {
+  const t = await getTranslations('Products')
   let products: Product[] = []
 
   try {
     const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM products')
     products = rows as Product[]
+    products = []
   } catch (error: unknown) {
     throw error
   }
@@ -59,12 +61,16 @@ export default async function Products() {
       <Link href="/products/add-product">Add Product</Link>
 
       <div className={st.productsList}>
-        {products.map((product) => (
-          <div key={product.serial_number} className={st.productItem}>
-            <div>{product.title}</div>
-            <div>{product.guarantee_start.toString()}</div>
-          </div>
-        ))}
+        {products.length === 0 ? (
+          <div className={st.emptyMessage}>{t('productsEmpty')}</div>
+        ) : (
+          products.map((product) => (
+            <div key={product.serial_number} className={st.productItem}>
+              <div>{product.title}</div>
+              <div>{product.guarantee_start.toString()}</div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )

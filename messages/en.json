@@ -1,9 +1,11 @@
 {
   "Products": {
-    "title": "Products"
+    "title": "Products",
+    "productsEmpty": "No products available"
   },
   "Orders": {
-    "title": "Orders"
+    "title": "Orders",
+    "ordersEmpty": "No orders available"
   },
   "NavMenu": {
     "Products": "Products",

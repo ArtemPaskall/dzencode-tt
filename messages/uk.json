@@ -1,9 +1,11 @@
 {
   "Products": {
-    "title": "Продукти"
+    "title": "Продукти",
+    "productsEmpty": "Товари відсутні"
   },
   "Orders": {
-    "title": "Замовлення"
+    "title": "Замовлення",
+    "ordersEmpty": "Замовлення отсутствуют"
   },
   "NavMenu": {
     "Products": "Продукти",
