@@ -100,3 +100,36 @@
     transform: rotate(360deg);
   }
 }
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadButton {
+  background-color: #d7d7d7;
+  border: 1px solid rgb(103, 103, 103);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-preload-wrapp {
+  margin-top: 20px;
+  position: relative;
+  width: fit-content;
+}
+
+.image-preload {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.image-preload-close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  cursor: pointer;
+}

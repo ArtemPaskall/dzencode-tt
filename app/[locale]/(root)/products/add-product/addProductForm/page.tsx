@@ -97,6 +97,9 @@ export default function AddProductForm() {
 
   type ProductFormData = z.infer<typeof productSchema>
 
+  const today = new Date()
+  const formattedToday = today.toISOString().split('T')[0] // "YYYY-MM-DD"
+
   const {
     register,
     handleSubmit,
@@ -109,7 +112,7 @@ export default function AddProductForm() {
       specification: '',
       type: 'monitor',
       isNew: '1',
-      guaranteeStart: '',
+      guaranteeStart: formattedToday,
       guaranteeEnd: '',
       priceValue: 0,
       photo: '',
@@ -281,6 +284,9 @@ export default function AddProductForm() {
               type="number"
               className={st['product-form__input']}
               {...register('priceValue', { valueAsNumber: true })}
+              onFocus={(e) => {
+                if (e.currentTarget.value === '0') e.currentTarget.value = ''
+              }}
             />
           </div>
 
