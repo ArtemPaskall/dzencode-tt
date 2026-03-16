@@ -1,26 +1,25 @@
-// export interface ProductPriceItem {
-//   value: number
-//   symbol: string
-//   isDefault: 0 | 1
-// }
-
 export interface ProductPriceItem {
-  USD: string
-  EUR: string
+  value: number
+  symbol: string
+  isDefault: 0 | 1
 }
+
+export type ProductType = 'monitor' | 'tv' | 'smartphone' | 'laptop' | 'tablet'
+
+
 
 export interface Product {
   id: number
-  serial_number: number
+  serial_number: string
   is_new: boolean
   photo: string
   title: string
-  type: string
+  type: ProductType
   specification: string
   guarantee_start: string
   guarantee_end: string
-  price: ProductPriceItem
-  order_id: number
+  price: ProductPriceItem[]
+  order_id: number | null
   date: string
 }
 

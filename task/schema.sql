@@ -7,16 +7,17 @@ CREATE TABLE orders (
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  serial_number INT NOT NULL UNIQUE,
-  is_new BOOLEAN DEFAULT TRUE,
+  serial_number VARCHAR(100) NOT NULL UNIQUE,
+  is_new TINYINT(1) DEFAULT 1,
   photo VARCHAR(255),
   title VARCHAR(255) NOT NULL,
-  type VARCHAR(255),
-  specification TEXT,
+  type ENUM('monitor','tv','smartphone','laptop','tablet') NOT NULL,
+  specification TEXT NOT NULL,
   guarantee_start DATETIME,
   guarantee_end DATETIME,
   price JSON,
-  date DATETIME
+  order_id INT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE order_products (

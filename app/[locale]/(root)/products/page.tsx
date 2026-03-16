@@ -2,6 +2,15 @@ import ProductsClient from './ProductsClient'
 import { Product } from '@/types'
 import db from '@/libs/db'
 import { RowDataPacket } from 'mysql2'
+import { getTranslations } from 'next-intl/server'
+
+export async function generateMetadata() {
+  const t = await getTranslations('Products')
+
+  return {
+    title: t('title'),
+  }
+}
 
 export default async function ProductsPage() {
   let products: Product[] = []

@@ -65,8 +65,8 @@ export default function ProductsClient({ initialProducts }: Props) {
                 <div className={st.item__title}>{product.guarantee_start}</div>
                 <div className={st.item__serial}>{product.guarantee_end}</div>
               </div>
-              <div>{product.price.USD}</div>
-              <div>{product.price.EUR}</div>
+              {/* <div>{product.price.USD}</div>
+              <div>{product.price.EUR}</div> */}
               <Image
                 src={'/delete.png'}
                 width={20}
