@@ -33,10 +33,10 @@ import { ResultSetHeader } from 'mysql2'
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params
+    const { id } = await context.params
 
     const [result] = await db.query<ResultSetHeader>(
       'DELETE FROM products WHERE id = ?',
