@@ -14,19 +14,30 @@ export async function POST(req: Request) {
       guaranteeStart,
       guaranteeEnd,
       photo,
+      price,
     } = data
 
+    if (!title || !specification || !type || !price || price.length === 0) {
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      )
+    }
+
     const [result] = await db.query<ResultSetHeader>(
-      'INSERT INTO products (serial_number, title, specification, type, is_new, guarantee_start, guarantee_end, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      `INSERT INTO products 
+        (serial_number, title, specification, type, is_new, guarantee_start, guarantee_end, photo, price)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         serial_number,
         title,
         specification,
         type,
-        isNew,
-        guaranteeStart,
-        guaranteeEnd,
+        isNew === '1' ? 1 : 0,
+        guaranteeStart || null,
+        guaranteeEnd || null,
         photo || null,
+        JSON.stringify(price),
       ]
     )
 

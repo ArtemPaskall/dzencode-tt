@@ -79,8 +79,7 @@ export default function AddProductForm() {
       .refine((val) => !isNaN(Date.parse(val)), { message: t('invalid_date') }),
 
     priceValue: z
-      .number()
-      .refine((val) => !isNaN(val), { message: t('must_be_number') })
+      .number({ message: t('must_be_number') })
       .refine((val) => val > 0, { message: t('greater_than_0') })
       .refine((val) => val <= 1000000, { message: t('too_large') }),
 
@@ -151,6 +150,8 @@ export default function AddProductForm() {
         serial_number: generateSerialNumber(),
         price: priceConverted,
       }
+
+      console.log(payload)
 
       const response = await fetch('/api/products/addProduct', {
         method: 'POST',
@@ -284,6 +285,7 @@ export default function AddProductForm() {
               type="number"
               className={st['product-form__input']}
               {...register('priceValue', { valueAsNumber: true })}
+              placeholder="0"
               onFocus={(e) => {
                 if (e.currentTarget.value === '0') e.currentTarget.value = ''
               }}
