@@ -1,0 +1,77 @@
+.product {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    background-color: rgb(255, 255, 255);
+    padding: 15px 25px;
+    border-radius: 3px;
+    border: 1px solid rgb(222, 222, 222);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  &__item:nth-child(even) .item__marker {
+    background-color: rgb(12, 12, 12);
+  }
+
+  &__add {
+    margin-bottom: 30px;
+    display: block;
+  }
+}
+
+.item {
+  &__marker {
+    height: 6px;
+    width: 6px;
+    min-width: 6px;
+    border-radius: 50%;
+    background-color: rgb(13, 186, 70);
+    box-sizing: border-box;
+  }
+
+  &__titleWrapp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__title {
+    color: rgb(76, 76, 76);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__serial {
+    color: rgb(171, 171, 171);
+    font-size: 11px;
+    font-weight: 500;
+  }
+}
+
+.deleteMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%);
+  border-radius: 10px;
+  box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border: 1px solid rgb(188, 188, 188);
+  font-size: 14px;
+  font-weight: 600;
+}

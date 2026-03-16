@@ -1,6 +1,5 @@
 'use client'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
 import st from '../styles/error.module.scss'
 
 export default function RootError({
@@ -19,9 +18,6 @@ export default function RootError({
       <button onClick={() => reset()} className={st.Error__resetButton}>
         {t('tryAgain')}
       </button>
-      <Link href={'/'} className={st.Error__homeButton}>
-        {t('goHome')}
-      </Link>
     </div>
   )
 }

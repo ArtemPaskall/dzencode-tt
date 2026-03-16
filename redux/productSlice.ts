@@ -36,10 +36,15 @@ export const addProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   'products/deleteProduct',
-  async (id: number) => {
-    await fetch(`/api/products/${id}`, {
+  async (id: number, { rejectWithValue }) => {
+    const res = await fetch(`/api/products/${id}`, {
       method: 'DELETE',
     })
+
+    if (!res.ok) {
+      const data = await res.json()
+      return rejectWithValue(data.error || 'Delete failed')
+    }
 
     return id
   }
@@ -48,7 +53,11 @@ export const deleteProduct = createAsyncThunk(
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    setProducts(state, action: { payload: Product[] }) {
+      state.items = action.payload
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -80,4 +89,5 @@ const productsSlice = createSlice({
   },
 })
 
+export const { setProducts } = productsSlice.actions
 export default productsSlice.reducer

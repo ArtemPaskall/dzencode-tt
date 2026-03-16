@@ -21,16 +21,30 @@ export default async function Orders() {
 
   const orders: Order[] = await res.json()
 
+  // ✅ Консоль з типом
+  orders.forEach((order) => {
+    console.log('Order:', order)
+    // Приклад перевірки типу
+    if (typeof order.id !== 'number') console.warn('ID is not number!', order)
+    if (typeof order.title !== 'string')
+      console.warn('Title is not string!', order)
+    if (order.description && typeof order.description !== 'string')
+      console.warn('Description is not string!', order)
+    if (order.date && isNaN(Date.parse(order.date)))
+      console.warn('Date is invalid!', order)
+  })
+
   return (
-    <div className={st.productsPage}>
-      <Link href="/products/add-product">Add Order</Link>
-      <div className={st.productsList}>
-        {orders.map((order) => (
-          <div key={order.id} className={st.productItem}>
-            {order.title}
-          </div>
-        ))}
-      </div>
+    <div className={st.orderList}>
+      {orders.map((order) => (
+        <Link
+          key={order.id}
+          href={`/orders/${order.id}`}
+          className={st.productItem}
+        >
+          {order.title}
+        </Link>
+      ))}
     </div>
   )
 }

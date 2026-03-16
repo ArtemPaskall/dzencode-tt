@@ -1,7 +1,12 @@
+// export interface ProductPriceItem {
+//   value: number
+//   symbol: string
+//   isDefault: 0 | 1
+// }
+
 export interface ProductPriceItem {
-  value: number
-  symbol: string
-  isDefault: 0 | 1
+  USD: string
+  EUR: string
 }
 
 export interface Product {
@@ -14,7 +19,7 @@ export interface Product {
   specification: string
   guarantee_start: string
   guarantee_end: string
-  price: ProductPriceItem[]
+  price: ProductPriceItem
   order_id: number
   date: string
 }

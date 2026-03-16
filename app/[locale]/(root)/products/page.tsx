@@ -1,43 +1,25 @@
-import { getTranslations } from 'next-intl/server'
-import '@/app/styles/globals.scss'
-import st from './products.module.scss'
-import { Link } from '@/i18n/navigation'
+import ProductsClient from './ProductsClient'
 import { Product } from '@/types'
 import db from '@/libs/db'
 import { RowDataPacket } from 'mysql2'
 
-export async function generateMetadata() {
-  const t = await getTranslations('Products')
-  return { title: t('title') }
-}
-
-export default async function Products() {
-  const t = await getTranslations('Products')
+export default async function ProductsPage() {
   let products: Product[] = []
 
   try {
     const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM products')
-    products = rows as Product[]
+
+    products = (rows as Product[]).map((product) => ({
+      ...product,
+      guarantee_start: new Date(product.guarantee_start).toISOString(),
+      guarantee_end: new Date(product.guarantee_end).toISOString(),
+      date: new Date(product.date).toISOString(),
+    }))
+
+    console.log(products)
   } catch (error: unknown) {
     throw error
   }
 
-  return (
-    <div className={st.productsPage}>
-      <Link href="/products/add-product">Add Product</Link>
-
-      <div className={st.productsList}>
-        {products.length === 0 ? (
-          <div className={st.emptyMessage}>{t('productsEmpty')}</div>
-        ) : (
-          products.map((product) => (
-            <div key={product.serial_number} className={st.productItem}>
-              <div>{product.title}</div>
-              <div>{product.guarantee_start.toString()}</div>
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  )
+  return <ProductsClient initialProducts={products} />
 }

@@ -1,7 +1,8 @@
 {
   "Products": {
     "title": "Продукти",
-    "productsEmpty": "Товари відсутні"
+    "productsEmpty": "Товари відсутні",
+    "addProduct": "Додати товар"
   },
   "Orders": {
     "title": "Замовлення",
@@ -20,7 +21,6 @@
   },
   "ErrorPage": {
     "title": "Упс! Щось пішло не так.",
-    "tryAgain": "Спробувати ще раз",
-    "goHome": "На головну"
+    "tryAgain": "Спробувати ще раз"
   }
 }

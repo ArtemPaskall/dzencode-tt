@@ -1,7 +1,8 @@
 {
   "Products": {
     "title": "Products",
-    "productsEmpty": "No products available"
+    "productsEmpty": "No products available",
+    "addProduct": "Add Product"
   },
   "Orders": {
     "title": "Orders",
@@ -20,7 +21,6 @@
   },
   "ErrorPage": {
     "title": "Oops! Something went wrong.",
-    "tryAgain": "Try again",
-    "goHome": "Go to home"
+    "tryAgain": "Try again"
   }
 }
