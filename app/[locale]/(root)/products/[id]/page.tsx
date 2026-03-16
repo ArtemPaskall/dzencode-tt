@@ -1,18 +1,15 @@
-// app/[locale]/products/[id]/page.tsx
 import { notFound } from 'next/navigation'
-import db from '@/libs/db'
 import { Product } from '@/types'
-import Image from 'next/image'
+import db from '@/libs/db'
+import st from '../products.module.scss' // створити або взяти свій scss
 import { RowDataPacket } from 'mysql2'
 
 interface Props {
-  params: { locale: string; id: string } // <--- має бути string
+  params: { id: string }
 }
 
 export default async function ProductPage({ params }: Props) {
-  const id = parseInt(params.id, 10)
-
-  if (isNaN(id)) return notFound() // <--- перевірка на NaN
+  const { id } = await params
 
   const [rows] = await db.query<RowDataPacket[]>(
     'SELECT * FROM products WHERE id = ?',
@@ -23,29 +20,22 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) return notFound()
 
+  const formattedProduct = {
+    ...product,
+    guarantee_start: new Date(product.guarantee_start).toISOString(),
+    guarantee_end: new Date(product.guarantee_end).toISOString(),
+    date: new Date(product.date).toISOString(),
+  }
+
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>{product.title}</h1>
+    <div className={st.productsPage}>
+      <h1>Product Details</h1>
       <p>
-        <strong>Serial Number:</strong> {product.serial_number}
+        <strong>ID:</strong> {formattedProduct.id}
       </p>
       <p>
-        <strong>Condition:</strong> {product.is_new ? 'New' : 'Used'}
+        <strong>Title:</strong> {formattedProduct.title}
       </p>
-      <p>
-        <strong>Guarantee:</strong> {product.guarantee_start} –{' '}
-        {product.guarantee_end}
-      </p>
-      <p>
-        <strong>USD:</strong> {product.price.USD} | <strong>EUR:</strong>{' '}
-        {product.price.EUR}
-      </p>
-      <Image
-        src={`/products/${product.id}.jpg`}
-        width={300}
-        height={200}
-        alt={product.title}
-      />
     </div>
   )
 }

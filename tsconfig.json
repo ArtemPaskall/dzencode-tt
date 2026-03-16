@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "app/[locale]/(root)/products/ProductsClient.tsx"  ],
   "exclude": ["node_modules"]
 }

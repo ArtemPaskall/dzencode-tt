@@ -16,10 +16,14 @@ export default async function ProductsPage() {
       date: new Date(product.date).toISOString(),
     }))
 
-    console.log(products)
+    console.log('products', products)
   } catch (error: unknown) {
     throw error
   }
 
-  return <ProductsClient initialProducts={products} />
+  return (
+    <>
+      <ProductsClient initialProducts={products} />
+    </>
+  )
 }
