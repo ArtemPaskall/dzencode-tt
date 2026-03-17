@@ -9,9 +9,9 @@
     "to": "To"
   },
   "ProductPage": {
+    "title": "Product Details",
     "productDetails": "Product Details",
     "productImage": "Product Image",
-    "serialNumber": "S/N",
     "type": "Type",
     "condition": "Condition",
     "new": "New",

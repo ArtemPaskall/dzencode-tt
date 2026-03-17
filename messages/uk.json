@@ -9,9 +9,9 @@
     "to": "До"
   },
   "ProductPage": {
+    "title": "Деталі продукту",
     "productDetails": "Деталі продукту",
     "productImage": "Зображення продукту",
-    "serialNumber": "S/N",
     "type": "Тип",
     "condition": "Стан",
     "new": "Новий",
