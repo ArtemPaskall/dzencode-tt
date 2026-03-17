@@ -2,7 +2,11 @@
   "Products": {
     "title": "Продукти",
     "productsEmpty": "Товари відсутні",
-    "addProduct": "Додати товар"
+    "addProduct": "Додати товар",
+    "new": "Новий",
+    "used": "Вживаний",
+    "from": "Від",
+    "to": "До"
   },
   "AddProduct": {
     "header": "Додати продукт",

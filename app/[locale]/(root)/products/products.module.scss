@@ -1,31 +1,82 @@
 .product {
+  width: 100%;
+
   &__list {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
+
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
 
   &__item {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     background-color: rgb(255, 255, 255);
-    padding: 15px 25px;
+    padding: 10px 25px;
     border-radius: 3px;
     border: 1px solid rgb(222, 222, 222);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition:
+      transform 0.5s ease,
+      opacity 0.5s ease;
+
+    &.deleting {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  &__item:hover {
+    background-color: rgb(251, 251, 251);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   &__item:nth-child(even) .item__marker {
     background-color: rgb(12, 12, 12);
   }
 
-  &__add {
+  &__addWrapp {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 30px;
+  }
+
+  &__add {
     display: block;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  &__add:hover {
+    color: #838383;
   }
 }
 
@@ -44,18 +95,91 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    gap: 5px;
+    width: 400px;
   }
 
   &__title {
     color: rgb(76, 76, 76);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
+    text-decoration: underline;
   }
 
   &__serial {
     color: rgb(171, 171, 171);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
+  }
+
+  &__photo {
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+
+  &__condition {
+    font-size: 12px;
+    font-weight: 600;
+    width: 80px;
+  }
+
+  &__condition--new {
+    color: green;
+  }
+
+  &__guaranteeWrapp,
+  &__priceWrapp {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+    width: 200px;
+
+    &--inner {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(95, 95, 95);
+  }
+
+  &__dateTitle {
+    font-size: 10px;
+    color: rgb(131, 131, 131);
+  }
+
+  &__type {
+    width: 100px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgb(60, 60, 60);
+  }
+
+  &__priceWrapp {
+    width: 100px;
+  }
+
+  &__deleteWrapp {
+    width: 50px;
+  }
+
+  &__delete {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    transition: all 0.3s;
+  }
+
+  &__delete:hover {
+    transform: scale(1.1);
   }
 }
 

@@ -1,0 +1,13 @@
+.productsPage {
+  &__photoWrapp {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  &__photo {
+    object-fit: cover;
+  }
+}

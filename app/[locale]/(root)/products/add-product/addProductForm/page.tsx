@@ -151,8 +151,6 @@ export default function AddProductForm() {
         price: priceConverted,
       }
 
-      console.log(payload)
-
       const response = await fetch('/api/products/addProduct', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

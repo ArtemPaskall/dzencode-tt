@@ -2,7 +2,11 @@
   "Products": {
     "title": "Products",
     "productsEmpty": "No products available",
-    "addProduct": "Add Product"
+    "addProduct": "Add Product",
+    "new": "New",
+    "used": "Used",
+    "from": "From",
+    "to": "To"
   },
   "AddProduct": {
     "header": "Add Product",

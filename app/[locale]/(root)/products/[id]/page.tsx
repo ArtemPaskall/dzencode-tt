@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import { Product } from '@/types'
 import db from '@/libs/db'
-import st from '../products.module.scss'
 import { RowDataPacket } from 'mysql2'
 import Image from 'next/image'
+import st from './productID.module.scss'
 
 interface Props {
   params: { id: string }
@@ -23,28 +23,29 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className={st.productsPage}>
-      <h1>Product Details</h1>
-      <p>
-        <strong>ID:</strong> {product.id}
-      </p>
-      <p>
-        <strong>Title:</strong> {product.title}
-      </p>
-      {product.photo ? (
-        <Image
-          src={product.photo}
-          width={100}
-          height={100}
-          alt={product.title || 'Product Image'}
-        />
-      ) : (
-        <Image
-          src={'/logo.svg'}
-          width={100}
-          height={100}
-          alt={product.title || 'Product Image'}
-        />
-      )}
+      <h3>Product Details {product.id}</h3>
+      <div className={st.productsPage__photoWrapp}>
+        {product.photo ? (
+          <Image
+            src={product.photo}
+            width={100}
+            height={100}
+            alt={product.title || 'Product Image'}
+            className={st.productsPage__photo}
+          />
+        ) : (
+          <Image
+            src={'/logo.svg'}
+            width={100}
+            height={100}
+            alt={product.title || 'Product Image'}
+            className={st.productsPage__photo}
+          />
+        )}
+        <div>
+          <h1>{product.title}</h1>
+        </div>
+      </div>
     </div>
   )
 }

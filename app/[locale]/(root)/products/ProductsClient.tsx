@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from '@/redux/store'
 import { setProducts, fetchProducts, deleteProduct } from '@/redux/productSlice'
 import st from './products.module.scss'
 import { Link } from '@/i18n/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Product } from '@/types'
 import Image from 'next/image'
 
@@ -15,6 +15,8 @@ interface Props {
 
 export default function ProductsClient({ initialProducts }: Props) {
   const t = useTranslations('Products')
+  const locale = useLocale()
+  const [deletingId, setDeletingId] = useState<number | null>(null)
   const dispatch = useDispatch<AppDispatch>()
   const { items: products, loading } = useSelector(
     (state: RootState) => state.products
@@ -27,25 +29,43 @@ export default function ProductsClient({ initialProducts }: Props) {
     dispatch(setProducts(initialProducts))
   }, [dispatch, initialProducts])
 
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
+  const handleDelete = async (id: number, event?: React.MouseEvent) => {
+    if (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
 
-  const handleDelete = async (id: number) => {
+    setDeletingId(id)
+
     try {
-      await dispatch(deleteProduct(id)).unwrap() // unwrap дозволяє ловити помилки
+      await dispatch(deleteProduct(id)).unwrap()
       setMessage('Product was deleted successfully')
-      setTimeout(() => setMessage(null), 3000) // приховати через 3 сек
+      setTimeout(() => setMessage(null), 3000)
     } catch (err) {
       setError('Failed to delete product')
       setTimeout(() => setError(null), 3000)
     }
+    setDeletingId(null)
+  }
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString(`${locale}`, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
   }
 
   return (
     <>
-      <Link href="/products/add-product" className={st.product__add}>
-        {t('addProduct')}
+      <Link href="/products/add-product" className={st.product__addWrapp}>
+        <Image
+          src={'/add-plus.png'}
+          width={20}
+          height={20}
+          alt={'add product'}
+        ></Image>
+        <div className={st.product__add}>{t('addProduct')}</div>
       </Link>
 
       {loading ? (
@@ -53,28 +73,81 @@ export default function ProductsClient({ initialProducts }: Props) {
       ) : products.length > 0 ? (
         <div className={st.product__list}>
           {products.map((product) => (
-            <div key={product.serial_number} className={st.product__item}>
-              <Link href={`/products/${product.id}`}>{product.id}</Link>
+            <Link
+              href={`/products/${product.id}`}
+              key={product.id}
+              className={`${st.product__item} ${deletingId === product.id ? st.deleting : ''}`}
+            >
               <div className={st.item__marker}></div>
+
+              {product.photo ? (
+                <Image
+                  src={product.photo}
+                  width={40}
+                  height={40}
+                  alt={'delete'}
+                  className={st.item__photo}
+                ></Image>
+              ) : (
+                <Image
+                  src={`${'/logo.svg'}`}
+                  width={40}
+                  height={40}
+                  alt={'delete'}
+                  className={st.item__photo}
+                ></Image>
+              )}
               <div className={st.item__titleWrapp}>
                 <div className={st.item__title}>{product.title}</div>
                 <div className={st.item__serial}>{product.serial_number}</div>
               </div>
-              <div>{product.is_new ? 'новий' : 'б/у'}</div>
-              <div className={st.item__titleWrapp}>
-                <div className={st.item__title}>{product.guarantee_start}</div>
-                <div className={st.item__serial}>{product.guarantee_end}</div>
+              <div className={st.item__type}>{product.type}</div>
+              <div className={st.item__guaranteeWrapp}>
+                <div className={st['item__guaranteeWrapp--inner']}>
+                  <div className={st.item__dateTitle}>{t('from')}</div>
+                  <div className={st.item__date}>
+                    {formatDate(product.guarantee_start)}
+                  </div>
+                </div>
+                <div className={st['item__guaranteeWrapp--inner']}>
+                  <div className={st.item__dateTitle}>{t('to')}</div>
+                  <div className={st.item__date}>
+                    {formatDate(product.guarantee_end)}
+                  </div>
+                </div>
               </div>
-              {/* <div>{product.price.USD}</div>
-              <div>{product.price.EUR}</div> */}
-              <Image
-                src={'/delete.png'}
-                width={20}
-                height={20}
-                alt={'delete'}
-                onClick={() => handleDelete(product.id)}
-              ></Image>
-            </div>
+              <div
+                className={`${st.item__condition} ${product.is_new ? st['item__condition--new'] : ''}`}
+              >
+                {product.is_new ? t('new') : t('used')}
+              </div>
+              <div className={st.item__priceWrapp}>
+                <div className={st['item__guaranteeWrapp--inner']}>
+                  <div className={st.item__date}>
+                    {product.price?.[0]?.value ?? '-'}
+                  </div>
+                  <div className={st.item__dateTitle}>
+                    {product.price?.[0]?.symbol ?? '-'}
+                  </div>
+                </div>
+                <div className={st['item__guaranteeWrapp--inner']}>
+                  <div className={st.item__date}>
+                    {product.price?.[1]?.value ?? '-'}
+                  </div>
+                  <div className={st.item__dateTitle}>$</div>
+                </div>
+              </div>
+              <div className={st.item__deleteWrapp}>
+                <Image
+                  src={'/delete.png'}
+                  width={20}
+                  height={20}
+                  alt={'delete'}
+                  onClick={(e) => handleDelete(product.id, e)}
+                  className={st.item__delete}
+                ></Image>
+              </div>
+            </Link>
           ))}
         </div>
       ) : (
