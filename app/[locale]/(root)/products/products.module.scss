@@ -65,6 +65,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 30px;
+    outline: none;
   }
 
   &__add {
@@ -122,6 +123,7 @@
     font-size: 12px;
     font-weight: 600;
     width: 80px;
+    color: rgb(76, 76, 76);
   }
 
   &__condition--new {

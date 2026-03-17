@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
-import { setProducts, fetchProducts, deleteProduct } from '@/redux/productSlice'
+import { setProducts, deleteProduct } from '@/redux/productSlice'
 import st from './products.module.scss'
 import { Link } from '@/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
@@ -124,17 +124,15 @@ export default function ProductsClient({ initialProducts }: Props) {
               <div className={st.item__priceWrapp}>
                 <div className={st['item__guaranteeWrapp--inner']}>
                   <div className={st.item__date}>
-                    {product.price?.[0]?.value ?? '-'}
-                  </div>
-                  <div className={st.item__dateTitle}>
-                    {product.price?.[0]?.symbol ?? '-'}
-                  </div>
-                </div>
-                <div className={st['item__guaranteeWrapp--inner']}>
-                  <div className={st.item__date}>
                     {product.price?.[1]?.value ?? '-'}
                   </div>
                   <div className={st.item__dateTitle}>$</div>
+                </div>
+                <div className={st['item__guaranteeWrapp--inner']}>
+                  <div className={st.item__date}>
+                    {product.price?.[0]?.value ?? '-'}
+                  </div>
+                  <div className={st.item__dateTitle}>UAH</div>
                 </div>
               </div>
               <div className={st.item__deleteWrapp}>
