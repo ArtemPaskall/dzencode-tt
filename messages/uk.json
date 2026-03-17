@@ -8,6 +8,17 @@
     "from": "Від",
     "to": "До"
   },
+  "ProductPage": {
+    "productDetails": "Деталі продукту",
+    "productImage": "Зображення продукту",
+    "serialNumber": "S/N",
+    "type": "Тип",
+    "condition": "Стан",
+    "new": "Новий",
+    "used": "Вживаний",
+    "price": "Ціна",
+    "specification": "Специфікація"
+  },
   "AddProduct": {
     "header": "Додати продукт",
     "title": "Назва",

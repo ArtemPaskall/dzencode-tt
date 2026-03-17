@@ -8,6 +8,17 @@
     "from": "From",
     "to": "To"
   },
+  "ProductPage": {
+    "productDetails": "Product Details",
+    "productImage": "Product Image",
+    "serialNumber": "S/N",
+    "type": "Type",
+    "condition": "Condition",
+    "new": "New",
+    "used": "Used",
+    "price": "Price",
+    "specification": "Specification"
+  },
   "AddProduct": {
     "header": "Add Product",
     "title": "Title",
