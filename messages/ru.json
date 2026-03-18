@@ -52,6 +52,9 @@
     "header": "Добавить заказ",
     "addOrder": "Добавить заказ",
     "addProduct": "Добавить продукт",
+    "itemAdd": "товар(ы) добавлен(о)",
+    "canAddProducts": "Вы можете добавить товары из списка",
+    "add": "Добавить",
     "id": "ID заказа",
     "title": "Название",
     "description": "Описание",
@@ -76,7 +79,7 @@
   },
   "NavMenu": {
     "Products": "Продукты",
-    "Orders": "Приходы"
+    "Orders": "Заказы"
   },
   "ActiveConnections": {
     "Connections": "Соединения"

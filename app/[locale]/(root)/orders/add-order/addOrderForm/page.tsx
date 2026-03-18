@@ -150,9 +150,6 @@ export default function AddOrderForm() {
             {...register('description')}
           />
         </div>
-        {selectedProducts.length > 0 && (
-          <div>{selectedProducts.length} items was added</div>
-        )}
 
         <div
           className={st.order__addProdWrapp}
@@ -166,6 +163,19 @@ export default function AddOrderForm() {
           ></Image>
           <div className={st.product__add}>{t('addProduct')}</div>
         </div>
+
+        {selectedProducts.length > 0 && (
+          <div className={st.products__add}>
+            <Image
+              src={'/success.png'}
+              width={20}
+              height={20}
+              alt={'add products'}
+            ></Image>
+            <strong> {selectedProducts.length}</strong>
+            {t('itemAdd')}
+          </div>
+        )}
 
         {message && (
           <div
@@ -192,9 +202,7 @@ export default function AddOrderForm() {
       {isProdModalOpen && (
         <div className={st.prodModalWrapp}>
           <div className={st.prodModal}>
-            <div className={st.prodModal__header}>
-              Ви можете додати товари зі списку
-            </div>
+            <div className={st.prodModal__header}>{t('canAddProducts')}</div>
             <div className={st.prodList}>
               {products.map((product) => {
                 const isSelected = selectedProducts.includes(product.id)
@@ -220,8 +228,9 @@ export default function AddOrderForm() {
               onClick={() => {
                 setIsProdModalOpen(false)
               }}
+              className={st.addButton}
             >
-              додати
+              {t('add')}
             </div>
 
             <Image
