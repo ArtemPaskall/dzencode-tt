@@ -50,7 +50,8 @@
   },
   "Orders": {
     "title": "Заказы",
-    "ordersEmpty": "Заказы отсутствуют"
+    "ordersEmpty": "Заказы отсутствуют",
+    "addOrder": "Добавить заказ"
   },
   "NavMenu": {
     "Products": "Продукты",

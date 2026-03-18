@@ -50,7 +50,8 @@
   },
   "Orders": {
     "title": "Orders",
-    "ordersEmpty": "No orders available"
+    "ordersEmpty": "No orders available",
+    "addOrder": "Add order"
   },
   "NavMenu": {
     "Products": "Products",

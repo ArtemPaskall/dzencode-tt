@@ -13,26 +13,13 @@ const initialState: ProductsState = {
   error: null,
 }
 
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const res = await fetch('/api/products')
-    return await res.json()
-  }
-)
-
-export const addProduct = createAsyncThunk(
-  'products/addProduct',
-  async (product: Omit<Product, 'id'>) => {
-    const res = await fetch('/api/products', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(product),
-    })
-
-    return await res.json()
-  }
-)
+// export const fetchProducts = createAsyncThunk(
+//   'products/fetchProducts',
+//   async () => {
+//     const res = await fetch('/api/products')
+//     return await res.json()
+//   }
+// )
 
 export const deleteProduct = createAsyncThunk(
   'products/deleteProduct',
@@ -63,24 +50,19 @@ const productsSlice = createSlice({
     builder
 
       // fetch
-      .addCase(fetchProducts.pending, (state) => {
-        state.loading = true
-      })
+      // .addCase(fetchProducts.pending, (state) => {
+      //   state.loading = true
+      // })
 
-      .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.loading = false
-        state.items = action.payload
-      })
+      // .addCase(fetchProducts.fulfilled, (state, action) => {
+      //   state.loading = false
+      //   state.items = action.payload
+      // })
 
-      .addCase(fetchProducts.rejected, (state, action) => {
-        state.loading = false
-        state.error = action.error.message || 'Error'
-      })
-
-      // add
-      .addCase(addProduct.fulfilled, (state, action) => {
-        state.items.push(action.payload)
-      })
+      // .addCase(fetchProducts.rejected, (state, action) => {
+      //   state.loading = false
+      //   state.error = action.error.message || 'Error'
+      // })
 
       // delete
       .addCase(deleteProduct.fulfilled, (state, action) => {

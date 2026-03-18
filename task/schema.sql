@@ -16,7 +16,6 @@ CREATE TABLE products (
   guarantee_start DATETIME,
   guarantee_end DATETIME,
   price JSON,
-  order_id INT NULL,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,8 +1,9 @@
 import '@/app/styles/globals.scss'
-import st from './orders.module.scss'
-import { Link } from '@/i18n/navigation'
 import { Order } from '@/types'
 import { getTranslations } from 'next-intl/server'
+import OrdersClient from './OrdersClient'
+import { RowDataPacket } from 'mysql2'
+import db from '@/libs/db'
 
 export async function generateMetadata() {
   const t = await getTranslations('Orders')
@@ -12,26 +13,25 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Orders() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/orders`, {
-    cache: 'no-store',
-  })
+export default async function OrdersPage() {
+  let orders: Order[] = []
 
-  if (!res.ok) return <div>Failed to load orders ({res.status})</div>
+  try {
+    const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM orders')
 
-  const orders: Order[] = await res.json()
+    orders = (rows as Order[]).map((order) => ({
+      ...order,
+      date: new Date(order.date).toISOString(),
+    }))
+
+    console.log('orders', orders)
+  } catch (error: unknown) {
+    throw error
+  }
 
   return (
-    <div className={st.orderList}>
-      {orders.map((order) => (
-        <Link
-          key={order.id}
-          href={`/orders/${order.id}`}
-          className={st.productItem}
-        >
-          {order.title}
-        </Link>
-      ))}
-    </div>
+    <>
+      <OrdersClient initialOrders={orders} />
+    </>
   )
 }

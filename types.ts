@@ -6,8 +6,6 @@ export interface ProductPriceItem {
 
 export type ProductType = 'monitor' | 'tv' | 'smartphone' | 'laptop' | 'tablet'
 
-
-
 export interface Product {
   id: number
   serial_number: string
@@ -19,7 +17,6 @@ export interface Product {
   guarantee_start: string
   guarantee_end: string
   price: ProductPriceItem[]
-  order_id: number | null
   date: string
 }
 
@@ -28,4 +25,5 @@ export interface Order {
   title: string
   description: string
   date: string
+  products: Product[]
 }
