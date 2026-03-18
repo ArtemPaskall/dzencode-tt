@@ -48,6 +48,27 @@
     "network_error": "Network error. Please try again",
     "error_occurred": "An error occurred"
   },
+  "AddOrder": {
+    "header": "Add Order",
+    "addOrder": "Add Order",
+    "addProduct": "Add Product",
+    "id": "Order ID",
+    "title": "Title",
+    "description": "Description",
+    "date": "Date",
+    "submit": "Submit",
+    "must_be_number": "Must be a number",
+    "must_be_integer": "Must be an integer",
+    "min_3_characters": "Minimum 3 characters",
+    "max_100_characters": "Maximum 100 characters",
+    "min_5_characters": "Minimum 5 characters",
+    "max_2000_characters": "Maximum 2000 characters",
+    "required": "This field is required",
+    "invalid_date": "Invalid date format",
+    "something_went_wrong": "Something went wrong",
+    "order_added_successfully": "Order added successfully",
+    "network_error": "Network error"
+  },
   "Orders": {
     "title": "Orders",
     "ordersEmpty": "No orders available",

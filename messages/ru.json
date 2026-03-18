@@ -48,6 +48,27 @@
     "network_error": "Ошибка сети. Пожалуйста, попробуйте снова",
     "error_occurred": "Произошла ошибка"
   },
+  "AddOrder": {
+    "header": "Добавить заказ",
+    "addOrder": "Добавить заказ",
+    "addProduct": "Добавить продукт",
+    "id": "ID заказа",
+    "title": "Название",
+    "description": "Описание",
+    "date": "Дата",
+    "submit": "Отправить",
+    "must_be_number": "Должно быть числом",
+    "must_be_integer": "Должно быть целым числом",
+    "min_3_characters": "Минимум 3 символа",
+    "max_100_characters": "Максимум 100 символов",
+    "min_5_characters": "Минимум 5 символов",
+    "max_2000_characters": "Максимум 2000 символов",
+    "required": "Это поле обязательно",
+    "invalid_date": "Неверный формат даты",
+    "something_went_wrong": "Что-то пошло не так",
+    "order_added_successfully": "Заказ успешно добавлен",
+    "network_error": "Ошибка сети"
+  },
   "Orders": {
     "title": "Заказы",
     "ordersEmpty": "Заказы отсутствуют",

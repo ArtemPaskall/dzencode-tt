@@ -1,3 +1,5 @@
+import { RowDataPacket } from 'mysql2'
+
 export interface ProductPriceItem {
   value: number
   symbol: string
@@ -26,4 +28,23 @@ export interface Order {
   description: string
   date: string
   products: Product[]
+}
+
+export interface OrderWithProductRow extends RowDataPacket {
+  order_id: number
+  order_title: string
+  order_description: string
+  order_date: string | Date
+
+  product_id?: number
+  serial_number?: string
+  is_new?: number
+  photo?: string
+  product_title?: string
+  type?: ProductType
+  specification?: string
+  guarantee_start?: string | Date | null
+  guarantee_end?: string | Date | null
+  price?: string | null
+  product_date?: string | Date | null
 }

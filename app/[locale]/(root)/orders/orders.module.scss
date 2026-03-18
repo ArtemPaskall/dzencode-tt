@@ -6,6 +6,15 @@
     gap: 10px;
     margin-bottom: 30px;
     outline: none;
+
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #838383;
+    }
   }
 
   &__orderList {

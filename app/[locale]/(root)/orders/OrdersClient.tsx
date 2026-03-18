@@ -35,8 +35,6 @@ export default function OrdersClient({ initialOrders }: Props) {
     dispatch(setOrders(initialOrders))
   }, [dispatch, initialOrders])
 
-  console.log(orders)
-
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString(`${locale}`, {
       day: 'numeric',
@@ -78,7 +76,9 @@ export default function OrdersClient({ initialOrders }: Props) {
                     className={st.order__listImg}
                   ></Image>
                   <div>
-                    <div className={st.order__prodNumber}>23</div>
+                    <div className={st.order__prodNumber}>
+                      {order.products.length}
+                    </div>
                     <div className={st.order__prodTitle}>Products</div>
                   </div>
                 </div>

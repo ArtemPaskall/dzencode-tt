@@ -48,6 +48,27 @@
     "network_error": "Помилка мережі. Спробуйте ще раз",
     "error_occurred": "Сталася помилка"
   },
+  "AddOrder": {
+    "header": "Додати замовлення",
+    "addOrder": "Додати замовлення",
+    "addProduct": "Додати продукт",
+    "id": "ID ордеру",
+    "title": "Назва",
+    "description": "Опис",
+    "date": "Дата",
+    "submit": "Відправити",
+    "must_be_number": "Повинно бути числом",
+    "must_be_integer": "Повинно бути цілим числом",
+    "min_3_characters": "Мінімум 3 символи",
+    "max_100_characters": "Максимум 100 символів",
+    "min_5_characters": "Мінімум 5 символів",
+    "max_2000_characters": "Максимум 2000 символів",
+    "required": "Це поле обов'язкове",
+    "invalid_date": "Невірний формат дати",
+    "something_went_wrong": "Щось пішло не так",
+    "order_added_successfully": "Ордер успішно додано",
+    "network_error": "Помилка мережі"
+  },
   "Orders": {
     "title": "Замовлення",
     "ordersEmpty": "Замовлення відсутні",
