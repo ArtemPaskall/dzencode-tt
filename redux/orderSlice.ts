@@ -13,6 +13,11 @@ const initialState: OrdersState = {
   error: null,
 }
 
+type Payload = {
+  orderId: number
+  productId: number
+}
+
 // export const fetchOrders = createAsyncThunk(
 //   'orders/fetchOrders',
 //   async () => {
@@ -34,6 +39,26 @@ export const deleteOrder = createAsyncThunk(
     }
 
     return id
+  }
+)
+
+export const removeProductFromOrder = createAsyncThunk(
+  'orders/removeProductFromOrder',
+  async ({ orderId, productId }: Payload, { rejectWithValue }) => {
+    const res = await fetch('/api/orders/remove-prod', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ orderId, productId }),
+    })
+
+    if (!res.ok) {
+      const data = await res.json()
+      return rejectWithValue(data.error || 'Delete failed')
+    }
+
+    return { orderId, productId }
   }
 )
 
@@ -67,6 +92,16 @@ const ordersSlice = createSlice({
       // delete
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.items = state.items.filter((o) => o.id !== action.payload)
+      })
+
+      .addCase(removeProductFromOrder.fulfilled, (state, action) => {
+        const { orderId, productId } = action.payload
+
+        const order = state.items.find((o) => o.id === orderId)
+
+        if (order) {
+          order.products = order.products.filter((p) => p.id !== productId)
+        }
       })
   },
 })
