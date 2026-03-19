@@ -51,8 +51,9 @@
   "AddOrder": {
     "header": "Додати замовлення",
     "addOrder": "Додати замовлення",
-    "addProduct": "Додати продукт",
+    "addProduct": "Додати товар",
     "canAddProducts": "Ви можете додати товари зі списку",
+    "noProducts": "Немає продуктів",
     "add": "Додати",
     "itemAdd": "товар(и) додано",
     "id": "ID ордеру",
@@ -75,10 +76,17 @@
   "Orders": {
     "title": "Замовлення",
     "ordersEmpty": "Замовлення відсутні",
-    "addOrder": "Додати замовлення"
+    "addOrder": "Додати замовлення",
+    "products": "Товарів",
+    "confirmDeleteOrder": "Ви впевнені, що хочете видалити замовлення",
+    "cancel": "Скасувати",
+    "deleting": "Видалення...",
+    "delete": "ВИДАЛИТИ",
+    "orderDeletedSuccess": "Замовлення успішно видалено",
+    "deleteOrderError": "Не вдалося видалити замовлення"
   },
   "NavMenu": {
-    "Products": "Продукти",
+    "Products": "Товари",
     "Orders": "Замовлення"
   },
   "ActiveConnections": {

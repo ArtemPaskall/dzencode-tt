@@ -124,8 +124,8 @@ export default function AddOrderForm() {
     )
   }
 
-  // console.log(products)
-  console.log(selectedProducts)
+  console.log(products.length)
+  // console.log(selectedProducts)
   return (
     <div className={st['form-wrapper']}>
       <h2 className={st['form-header']}>{t('addOrder')}</h2>
@@ -201,49 +201,65 @@ export default function AddOrderForm() {
       </form>
       {isProdModalOpen && (
         <div className={st.prodModalWrapp}>
-          <div className={st.prodModal}>
-            <div className={st.prodModal__header}>{t('canAddProducts')}</div>
-            <div className={st.prodList}>
-              {products.map((product) => {
-                const isSelected = selectedProducts.includes(product.id)
+          {products.length > 0 ? (
+            <div className={st.prodModal}>
+              <div className={st.prodModal__header}>{t('canAddProducts')}</div>
+              <div className={st.prodList}>
+                {products.map((product) => {
+                  const isSelected = selectedProducts.includes(product.id)
 
-                return (
-                  <div
-                    key={product.id}
-                    className={`${st.prodItem} ${isSelected ? st.active : ''}`}
-                    onClick={() => toggleProduct(product.id)}
-                  >
-                    <div className={st.checkbox}>
-                      {isSelected && <span className={st.checkmark}>✓</span>}
+                  return (
+                    <div
+                      key={product.id}
+                      className={`${st.prodItem} ${isSelected ? st.active : ''}`}
+                      onClick={() => toggleProduct(product.id)}
+                    >
+                      <div className={st.checkbox}>
+                        {isSelected && <span className={st.checkmark}>✓</span>}
+                      </div>
+
+                      <div>{product.title}</div>
+                      <div>{`${product.price[1].value} $`}</div>
                     </div>
+                  )
+                })}
+              </div>
 
-                    <div>{product.title}</div>
-                    <div>{`${product.price[1].value} $`}</div>
-                  </div>
-                )
-              })}
+              <div
+                onClick={() => {
+                  setIsProdModalOpen(false)
+                }}
+                className={st.addButton}
+              >
+                {t('add')}
+              </div>
+
+              <Image
+                src={'/close.png'}
+                width={30}
+                height={30}
+                alt={'close'}
+                className={st.prodModalClose}
+                onClick={() => {
+                  setIsProdModalOpen(false)
+                }}
+              ></Image>
             </div>
-
-            <div
-              onClick={() => {
-                setIsProdModalOpen(false)
-              }}
-              className={st.addButton}
-            >
-              {t('add')}
+          ) : (
+            <div className={st.prodModal}>
+              <div className={st.noProducts}>{t('noProducts')}</div>
+              <Image
+                src={'/close.png'}
+                width={30}
+                height={30}
+                alt={'close'}
+                className={st.prodModalClose}
+                onClick={() => {
+                  setIsProdModalOpen(false)
+                }}
+              ></Image>
             </div>
-
-            <Image
-              src={'/close.png'}
-              width={30}
-              height={30}
-              alt={'close'}
-              className={st.prodModalClose}
-              onClick={() => {
-                setIsProdModalOpen(false)
-              }}
-            ></Image>
-          </div>
+          )}
         </div>
       )}
     </div>

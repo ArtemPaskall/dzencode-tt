@@ -10,20 +10,21 @@ export async function DELETE(
     const { id } = await context.params
 
     const [result] = await db.query<ResultSetHeader>(
-      'DELETE FROM products WHERE id = ?',
+      'DELETE FROM orders WHERE id = ?',
       [id]
     )
 
     if (result.affectedRows === 0) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
 
     return NextResponse.json(
-      { message: 'Product deleted successfully' },
+      { message: 'Order deleted successfully' },
       { status: 200 }
     )
   } catch (err) {
     console.error(err)
+
     return NextResponse.json({ error: 'Database error' }, { status: 500 })
   }
 }

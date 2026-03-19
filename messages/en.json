@@ -55,6 +55,7 @@
     "itemAdd": "item(s) was added",
     "canAddProducts": "You can add products from the list",
     "add": "Add",
+    "noProducts": "No products",
     "id": "Order ID",
     "title": "Title",
     "description": "Description",
@@ -75,7 +76,14 @@
   "Orders": {
     "title": "Orders",
     "ordersEmpty": "No orders available",
-    "addOrder": "Add order"
+    "addOrder": "Add order",
+    "products": "Products",
+    "confirmDeleteOrder": "Are you sure you want to delete the order",
+    "cancel": "Cancel",
+    "deleting": "Deleting...",
+    "delete": "DELETE",
+    "orderDeletedSuccess": "Order deleted successfully",
+    "deleteOrderError": "Failed to delete order"
   },
   "NavMenu": {
     "Products": "Products",

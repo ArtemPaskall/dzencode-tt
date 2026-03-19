@@ -51,9 +51,10 @@
   "AddOrder": {
     "header": "Добавить заказ",
     "addOrder": "Добавить заказ",
-    "addProduct": "Добавить продукт",
+    "addProduct": "Добавить товар",
     "itemAdd": "товар(ы) добавлен(о)",
     "canAddProducts": "Вы можете добавить товары из списка",
+    "noProducts": "Нет товаров",
     "add": "Добавить",
     "id": "ID заказа",
     "title": "Название",
@@ -75,10 +76,17 @@
   "Orders": {
     "title": "Заказы",
     "ordersEmpty": "Заказы отсутствуют",
-    "addOrder": "Добавить заказ"
+    "addOrder": "Добавить заказ",
+    "products": "Товаров",
+    "confirmDeleteOrder": "Вы уверены, что хотите удалить заказ",
+    "cancel": "Отмена",
+    "deleting": "Удаление...",
+    "delete": "УДАЛИТЬ",
+    "orderDeletedSuccess": "Заказ успешно удалён",
+    "deleteOrderError": "Не удалось удалить заказ"
   },
   "NavMenu": {
-    "Products": "Продукты",
+    "Products": "Товары",
     "Orders": "Заказы"
   },
   "ActiveConnections": {

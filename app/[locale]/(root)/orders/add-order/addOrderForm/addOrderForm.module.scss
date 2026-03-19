@@ -94,6 +94,7 @@
 
 .success {
   color: green;
+  border-radius: 10px;
 }
 
 .spinner {
@@ -150,7 +151,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(101, 140, 147, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -250,5 +251,12 @@
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 600;
+}
+.noProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-weight: 600;
 }
