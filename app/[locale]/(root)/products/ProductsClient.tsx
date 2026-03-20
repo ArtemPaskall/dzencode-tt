@@ -6,12 +6,20 @@ import { setProducts, deleteProduct } from '@/redux/productSlice'
 import st from './products.module.scss'
 import { Link } from '@/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { Product } from '@/types'
+import { Product, ProductType } from '@/types'
 import Image from 'next/image'
 
 interface Props {
   initialProducts: Product[]
 }
+
+const productTypes: ProductType[] = [
+  'monitor',
+  'tv',
+  'smartphone',
+  'laptop',
+  'tablet',
+]
 
 export default function ProductsClient({ initialProducts }: Props) {
   const t = useTranslations('Products')
@@ -21,9 +29,9 @@ export default function ProductsClient({ initialProducts }: Props) {
   const { items: products, loading } = useSelector(
     (state: RootState) => state.products
   )
-
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [selectedType, setSelectedType] = useState<ProductType | 'all'>('all')
 
   useEffect(() => {
     dispatch(setProducts(initialProducts))
@@ -56,23 +64,45 @@ export default function ProductsClient({ initialProducts }: Props) {
     })
   }
 
+  const filteredProducts = products.filter((product) => {
+    if (selectedType === 'all') return true
+    return product.type === selectedType
+  })
+
   return (
     <>
-      <Link href="/products/add-product" className={st.product__addWrapp}>
-        <Image
-          src={'/add-plus.png'}
-          width={20}
-          height={20}
-          alt={'add product'}
-        ></Image>
-        <div className={st.product__add}>{t('addProduct')}</div>
-      </Link>
+      <div className={st.product__topMenu}>
+        <Link href="/products/add-product" className={st.product__addWrapp}>
+          <Image
+            src={'/add-plus.png'}
+            width={20}
+            height={20}
+            alt={'add product'}
+          ></Image>
+          <div className={st.product__add}>{t('addProduct')}</div>
+        </Link>
+
+        <select
+          value={selectedType}
+          onChange={(e) =>
+            setSelectedType(e.target.value as ProductType | 'all')
+          }
+          className={st.filter}
+        >
+          <option value="all">All</option>
+          {productTypes.map((type) => (
+            <option key={type} value={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
         <div>Loading...</div>
-      ) : products.length > 0 ? (
+      ) : filteredProducts.length > 0 ? (
         <div className={st.product__list}>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <Link
               href={`/products/${product.id}`}
               key={product.id}

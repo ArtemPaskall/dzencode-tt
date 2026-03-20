@@ -8,8 +8,6 @@
     align-items: flex-start;
     gap: 10px;
 
- 
-
     overflow-x: auto;
     padding-bottom: 10px;
 
@@ -66,7 +64,6 @@
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    margin-bottom: 30px;
     outline: none;
   }
 
@@ -80,6 +77,14 @@
 
   &__add:hover {
     color: #838383;
+  }
+
+  &__topMenu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 30px;
   }
 }
 
@@ -202,4 +207,36 @@
   border: 1px solid rgb(188, 188, 188);
   font-size: 14px;
   font-weight: 600;
+}
+
+.filter {
+  padding: 8px 12px;
+  border-radius: 3px;
+  border: 1px solid #dedede;
+  background-color: #fff;
+  font-size: 14px;
+  color: #101828;
+  cursor: pointer;
+
+  outline: none;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
+
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+
+  padding-right: 32px;
+
+  &:hover {
+    border-color: #98a2b3;
+  }
+
+  &:focus {
+    border-color: #667085;
+    box-shadow: 0 0 0 3px rgba(102, 112, 133, 0.15);
+  }
 }
