@@ -19,6 +19,7 @@ import Image from 'next/image'
 import ProductItem from './(components)/ProductItem'
 import DeleteOrderModal from './(components)/DeleteOrderModal'
 import OrderItem from './(components)/OrderItem'
+import ProductList from './(components)/ProductList'
 
 interface Props {
   initialOrders: Order[]
@@ -275,34 +276,13 @@ export default function OrdersClient({ initialOrders }: Props) {
               </div>
 
               {isProdListOpen && (
-                <div className={st.addProd__prodList}>
-                  {availableProducts.length === 0 ? (
-                    <div className={st.addProd__empty}>{t('emptyList')}</div>
-                  ) : (
-                    <>
-                      {availableProducts.map((product) => (
-                        <div key={product.id}>
-                          <label className={st.addProd__label}>
-                            <input
-                              className={st.addProd__checkbox}
-                              type="checkbox"
-                              checked={selectedProducts.includes(product.id)}
-                              onChange={() => toggleProduct(product.id)}
-                            />
-                            {product.title}
-                          </label>
-                        </div>
-                      ))}
-
-                      <div
-                        className={st.addProd__addProdButton}
-                        onClick={handleAddProductsToOrder}
-                      >
-                        {t('add')}
-                      </div>
-                    </>
-                  )}
-                </div>
+                <ProductList
+                  availableProducts={availableProducts}
+                  selectedProducts={selectedProducts}
+                  toggleProduct={toggleProduct}
+                  handleAddProductsToOrder={handleAddProductsToOrder}
+                  t={t}
+                />
               )}
 
               {activeOrder.products?.length > 0 ? (
