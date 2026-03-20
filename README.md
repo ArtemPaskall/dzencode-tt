@@ -38,7 +38,6 @@ npm install
 npm run dev
 ```
 
-
 ## Project Description
 
 This project is a Next.js application built using the libraries listed above.
@@ -74,3 +73,7 @@ a delete button (which opens a confirmation modal before deletion)
 When clicking on an order, a panel opens on the right side showing the list of products included in that order, with the ability to add and remove products.
 
 Any changes to the product list are reflected and automatically updated across the orders.
+
+### Deployment and Database
+
+The project is deployed on Railway, and the MySQL database is hosted there as well. The local project connects to the database using external connection settings. Inside Railway, services communicate with the database via an internal port.
