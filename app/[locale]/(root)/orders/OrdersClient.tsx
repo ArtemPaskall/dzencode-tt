@@ -14,6 +14,9 @@ import {
 import { useLocale, useTranslations } from 'next-intl'
 import type { MouseEvent } from 'react'
 import Image from 'next/image'
+import ProductItem from './(components)/ProductItem'
+import DeleteOrderModal from './(components)/DeleteOrderModal'
+import OrderItem from './(components)/OrderItem'
 
 interface Props {
   initialOrders: Order[]
@@ -167,68 +170,16 @@ export default function OrdersClient({ initialOrders }: Props) {
             className={`${st.order__orderList} ${activeOrderId ? st.shrink : ''}`}
           >
             {orders.map((order) => (
-              <div
+              <OrderItem
                 key={order.id}
-                className={st.order__item}
-                onClick={() => openProductList(order.id)}
-              >
-                <div className={st.order__itemWrapp}>
-                  <div className={st.order__title}> {order.title}</div>
-                  <div className={st.order__itemInner}>
-                    <div className={st.order__linkList}>
-                      <Image
-                        src={'/list.png'}
-                        width={30}
-                        height={30}
-                        alt={'list'}
-                        className={st.order__listImg}
-                      ></Image>
-                      <div>
-                        <div className={st.order__prodNumber}>
-                          {order.products?.length ?? 0}
-                        </div>
-                        <div className={st.order__prodTitle}>
-                          {t('products')}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={st.order__date}>
-                      {formatDate(order.date)}
-                    </div>
-                    <div className={st.order__priceWrapp}>
-                      <div>
-                        {getOrderTotalInUAH(order)}{' '}
-                        <span className={st.order__Currency}>UAH</span>
-                      </div>
-                      <div>
-                        {getOrderTotalInUSD(order)}{' '}
-                        <span className={st.order__Currency}>USD</span>
-                      </div>
-                    </div>
-                    <div
-                      className={st.item__deleteWrapp}
-                      onClick={(e) => openDeleteModal(order.id, e)}
-                    >
-                      <Image
-                        src={'/delete.png'}
-                        width={20}
-                        height={20}
-                        alt={'delete'}
-                        className={st.item__delete}
-                      ></Image>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={st.order__arrowOpen}>
-                  <Image
-                    src={'/arrow.png'}
-                    width={30}
-                    height={30}
-                    alt={'arrow'}
-                  ></Image>
-                </div>
-              </div>
+                order={order}
+                onOpen={openProductList}
+                onDelete={openDeleteModal}
+                formatDate={formatDate}
+                getUAH={getOrderTotalInUAH}
+                getUSD={getOrderTotalInUSD}
+                t={t}
+              />
             ))}
           </div>
 
@@ -242,39 +193,21 @@ export default function OrdersClient({ initialOrders }: Props) {
                 className={st.sideList__close}
                 onClick={() => setActiveOrderId(null)}
               ></Image>
+
               <h3 className={st.sideList__title}>{activeOrder.title}</h3>
 
               {activeOrder.products?.length > 0 ? (
                 <div className={st.sideList__itemsList}>
                   {activeOrder.products.map((product) => (
-                    <div key={product.id} className={st.sideList__item}>
-                      <div className={st.sideList__itemTitle}>
-                        {product.title}
-                      </div>
-
-                      <div className={st.sideList__itemPrice}>
-                        {product.price?.[0]?.value ?? '-'}
-                        <span className={st.order__Currency}>UAH</span>
-                      </div>
-
-                      <div
-                        onClick={(e) =>
-                          removeProductFromOrderHandler(product.id, e)
-                        }
-                      >
-                        <Image
-                          src={'/delete.png'}
-                          width={25}
-                          height={25}
-                          alt={'delete'}
-                          className={st.sideList__itemDelete}
-                        ></Image>
-                      </div>
-                    </div>
+                    <ProductItem
+                      key={product.id}
+                      product={product}
+                      onRemove={removeProductFromOrderHandler}
+                    />
                   ))}
                 </div>
               ) : (
-                <div>Is Empty</div>
+                <div>{t('emptyList')}</div>
               )}
             </div>
           )}
@@ -283,65 +216,16 @@ export default function OrdersClient({ initialOrders }: Props) {
         <div className={st.emptyMessage}>{t('ordersEmpty')}</div>
       )}
 
-      {isOrderModalOpen && (
-        <div className={st.modalWrapp}>
-          <div className={st.modal}>
-            <Image
-              src={'/close.png'}
-              width={30}
-              height={30}
-              alt={'delete'}
-              onClick={() => closeDeleteModal()}
-              className={st.modal__close}
-            ></Image>
-            <div className={st.modal__top}>
-              <div>{t('confirmDeleteOrder')}</div>
-              <div className={st.modal__item}>{deletingOrder?.title}</div>
-              {message && (
-                <div className={st.success}>
-                  <Image
-                    src={'/success.png'}
-                    width={20}
-                    height={20}
-                    alt={'success'}
-                  ></Image>
-                  {message}
-                </div>
-              )}
-              {error && (
-                <div className={st.error}>
-                  <Image
-                    src={'/cross.png'}
-                    width={20}
-                    height={20}
-                    alt={'success'}
-                  ></Image>
-                  {error}
-                </div>
-              )}
-            </div>
-
-            <div className={st.modal__bottom}>
-              <button
-                type="button"
-                className={st.modal__cancel}
-                onClick={() => closeDeleteModal()}
-              >
-                {t('cancel')}
-              </button>
-
-              <button
-                type="button"
-                onClick={confirmDelete}
-                disabled={isDeleting}
-                className={st.modal__delete}
-              >
-                {isDeleting ? t('deleting') : t('delete')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DeleteOrderModal
+        isOpen={isOrderModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={isDeleting}
+        message={message}
+        error={error}
+        orderTitle={deletingOrder?.title}
+        t={t}
+      />
     </div>
   )
 }
