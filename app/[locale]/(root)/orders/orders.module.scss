@@ -34,7 +34,7 @@
 
     overflow-x: auto;
     padding-bottom: 10px;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease-out;
 
     &.shrink {
       width: 50%;
@@ -159,10 +159,15 @@
   }
 
   &__arrowOpen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform: translate(100%);
     transition: all 0.5s;
-    width: 60px;
+    width: 40px;
     height: 60px;
+    background-color: rgb(231, 231, 231);
+    border: none;
   }
 }
 
@@ -293,6 +298,7 @@
   height: 100%;
   border-radius: 5px;
   border: 1px solid #dedede;
+  position: relative;
 
   &__title {
     margin-bottom: 20px;
@@ -331,5 +337,12 @@
 
   &__itemPrice {
     font-size: 14px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
   }
 }

@@ -47,8 +47,8 @@ export default function OrdersClient({ initialOrders }: Props) {
   const getOrderTotalInUSD = (order: Order) => {
     const totalSum =
       order.products?.reduce((sum, product) => {
-        const uahPrice = product.price.find((p) => p.symbol === 'USD')
-        return sum + (uahPrice?.value ?? 0)
+        const usdPrice = product.price.find((p) => p.symbol === 'USD')
+        return sum + (usdPrice?.value ?? 0)
       }, 0) ?? 0
     return totalSum !== 0 ? totalSum : '-'
   }
@@ -220,22 +220,31 @@ export default function OrdersClient({ initialOrders }: Props) {
                   </div>
                 </div>
 
-                <Image
-                  src={'/arrow.jpg'}
-                  width={20}
-                  height={20}
-                  alt={'delete'}
-                  className={st.order__arrowOpen}
-                ></Image>
+                <div className={st.order__arrowOpen}>
+                  <Image
+                    src={'/arrow.png'}
+                    width={30}
+                    height={30}
+                    alt={'arrow'}
+                  ></Image>
+                </div>
               </div>
             ))}
           </div>
 
           {activeOrder && (
             <div className={st.sideList}>
+              <Image
+                src={'/close.png'}
+                width={25}
+                height={25}
+                alt={'close'}
+                className={st.sideList__close}
+                onClick={() => setActiveOrderId(null)}
+              ></Image>
               <h3 className={st.sideList__title}>{activeOrder.title}</h3>
 
-              {activeOrder.products.length > 0 ? (
+              {activeOrder.products?.length > 0 ? (
                 <div className={st.sideList__itemsList}>
                   {activeOrder.products.map((product) => (
                     <div key={product.id} className={st.sideList__item}>
@@ -244,7 +253,7 @@ export default function OrdersClient({ initialOrders }: Props) {
                       </div>
 
                       <div className={st.sideList__itemPrice}>
-                        {product.price[0].value}{' '}
+                        {product.price?.[0]?.value ?? '-'}
                         <span className={st.order__Currency}>UAH</span>
                       </div>
 
