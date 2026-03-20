@@ -38,7 +38,7 @@ export default function DeleteOrderModal({
         />
 
         <div className={st.modal__top}>
-          <div>{t('confirmDeleteOrder')}</div>
+          <div className={st.modal__header}>{t('confirmDeleteOrder')}</div>
           <div className={st.modal__item}>{orderTitle}</div>
 
           {message && (

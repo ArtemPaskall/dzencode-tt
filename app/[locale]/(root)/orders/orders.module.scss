@@ -209,6 +209,10 @@
     cursor: pointer;
   }
 
+  &__header {
+    font-weight: 600;
+  }
+
   &__bottom {
     display: flex;
     justify-content: flex-end;

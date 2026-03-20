@@ -124,8 +124,6 @@ export default function AddOrderForm() {
     )
   }
 
-  console.log(products.length)
-  // console.log(selectedProducts)
   return (
     <div className={st['form-wrapper']}>
       <h2 className={st['form-header']}>{t('addOrder')}</h2>
