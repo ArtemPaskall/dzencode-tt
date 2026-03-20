@@ -39,7 +39,7 @@ npm run dev
 ```
 
 
-Project Description
+## Project Description
 
 This project is a Next.js application built using the libraries listed above.
 
@@ -53,14 +53,14 @@ a language switcher
 
 On the side, there is a menu with the main sections: Products and Orders.
 
-Products
+### Products
 
 The Products section displays a list of products with all related information, along with a delete button for each item.
 
 It is possible to add new products using a form validated with react-hook-form and Zod.
 There is also an option to upload an image, which is stored in the cloud.
 
-Orders
+### Orders
 
 The Orders section displays a list of orders and allows creating new ones.
 Each order can include products selected from the product list.
