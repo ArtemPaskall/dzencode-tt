@@ -1,7 +1,7 @@
 'use client'
 import st from '../orders.module.scss'
 import Image from 'next/image'
-import { MouseEvent } from 'react'
+import { MouseEvent, useState } from 'react'
 
 interface Product {
   id: number
@@ -15,8 +15,22 @@ interface Props {
 }
 
 export default function ProductItem({ product, onRemove }: Props) {
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const handleDelete = (e: MouseEvent) => {
+    setIsDeleting(true)
+
+    setTimeout(() => {
+      onRemove(product.id, e)
+    }, 300)
+  }
+
   return (
-    <div className={st.sideList__item}>
+    <div
+      className={`${st.sideList__item} ${
+        isDeleting ? st.sideList__itemDeleting : ''
+      }`}
+    >
       <div className={st.sideList__itemTitle}>{product.title}</div>
 
       <div className={st.sideList__itemPrice}>
@@ -24,7 +38,7 @@ export default function ProductItem({ product, onRemove }: Props) {
         <span className={st.order__Currency}>UAH</span>
       </div>
 
-      <div onClick={(e) => onRemove(product.id, e)}>
+      <div onClick={handleDelete}>
         <Image
           src="/delete.png"
           width={25}

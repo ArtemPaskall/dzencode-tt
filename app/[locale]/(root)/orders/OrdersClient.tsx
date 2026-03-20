@@ -1,8 +1,9 @@
 'use client'
 import '@/app/styles/globals.scss'
 import st from './orders.module.scss'
+import { useMemo } from 'react'
 import { Link } from '@/i18n/navigation'
-import { Order } from '@/types'
+import { Order, Product } from '@/types'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
@@ -10,6 +11,7 @@ import {
   setOrders,
   deleteOrder,
   removeProductFromOrder,
+  addProductsToOrderAsync,
 } from '@/redux/orderSlice'
 import { useLocale, useTranslations } from 'next-intl'
 import type { MouseEvent } from 'react'
@@ -35,13 +37,68 @@ export default function OrdersClient({ initialOrders }: Props) {
     (state: RootState) => state.orders
   )
   const [activeOrderId, setActiveOrderId] = useState<number | null>(null)
+  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([])
+  const [isProdListOpen, setIsProdListOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const res = await fetch('/api/products')
+        const data = await res.json()
+        setAllProducts(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchProducts()
+  }, [])
+
+  const availableProducts = useMemo(() => {
+    const order = orders.find((o) => o.id === activeOrderId)
+
+    if (!order) return []
+
+    return allProducts.filter(
+      (product) => !order.products?.some((p) => p.id === product.id)
+    )
+  }, [allProducts, orders, activeOrderId])
+
+  useEffect(() => {
+    setSelectedProducts([])
+  }, [activeOrderId])
+
+  const handleAddProductsToOrder = async () => {
+    if (!activeOrderId || selectedProducts.length === 0) return
+
+    try {
+      dispatch(
+        addProductsToOrderAsync({
+          orderId: activeOrderId,
+          productIds: selectedProducts,
+          allProducts,
+        })
+      )
+
+      setSelectedProducts([])
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const toggleProduct = (id: number) => {
+    setSelectedProducts((prev) =>
+      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
+    )
+  }
 
   const deletingOrder = orders.find((order) => order.id === deletingId)
 
   const getOrderTotalInUAH = (order: Order) => {
     const totalSum =
       order.products?.reduce((sum, product) => {
-        const uahPrice = product.price.find((p) => p.symbol === 'UAH')
+        const uahPrice = product.price?.find((p) => p.symbol === 'UAH')
         return sum + (uahPrice?.value ?? 0)
       }, 0) ?? 0
     return totalSum !== 0 ? totalSum : '-'
@@ -50,7 +107,7 @@ export default function OrdersClient({ initialOrders }: Props) {
   const getOrderTotalInUSD = (order: Order) => {
     const totalSum =
       order.products?.reduce((sum, product) => {
-        const usdPrice = product.price.find((p) => p.symbol === 'USD')
+        const usdPrice = product.price?.find((p) => p.symbol === 'USD')
         return sum + (usdPrice?.value ?? 0)
       }, 0) ?? 0
     return totalSum !== 0 ? totalSum : '-'
@@ -95,7 +152,7 @@ export default function OrdersClient({ initialOrders }: Props) {
 
   useEffect(() => {
     dispatch(setOrders(initialOrders))
-  }, [dispatch, initialOrders])
+  }, [])
 
   useEffect(() => {
     if (message) {
@@ -150,6 +207,10 @@ export default function OrdersClient({ initialOrders }: Props) {
     }
   }
 
+  const toggelProdListOpen = () => {
+    setIsProdListOpen((prev) => !prev)
+  }
+
   return (
     <div className={st.order}>
       <Link href="/orders/add-order" className={st.order__addWrapp}>
@@ -179,6 +240,7 @@ export default function OrdersClient({ initialOrders }: Props) {
                 getUAH={getOrderTotalInUAH}
                 getUSD={getOrderTotalInUSD}
                 t={t}
+                isActive={activeOrderId === order.id}
               />
             ))}
           </div>
@@ -195,6 +257,46 @@ export default function OrdersClient({ initialOrders }: Props) {
               ></Image>
 
               <h3 className={st.sideList__title}>{activeOrder.title}</h3>
+
+              <div
+                className={st.addProd__openButton}
+                onClick={() => toggelProdListOpen()}
+              >
+                {t('addProduct')}
+                <Image
+                  src={'/arrow.png'}
+                  width={25}
+                  height={25}
+                  alt={'arrow'}
+                  className={`${st.addProd__openButtonImg} ${
+                    isProdListOpen ? st.rotate : ''
+                  }`}
+                ></Image>
+              </div>
+
+              {isProdListOpen && (
+                <div className={st.addProd__prodList}>
+                  {availableProducts.map((product) => (
+                    <div key={product.id}>
+                      <label className={st.addProd__label}>
+                        <input
+                          className={st.addProd__checkbox}
+                          type="checkbox"
+                          checked={selectedProducts.includes(product.id)}
+                          onChange={() => toggleProduct(product.id)}
+                        />
+                        {product.title}
+                      </label>
+                    </div>
+                  ))}
+                  <div
+                    className={st.addProd__addProdButton}
+                    onClick={handleAddProductsToOrder}
+                  >
+                    {t('add')}
+                  </div>
+                </div>
+              )}
 
               {activeOrder.products?.length > 0 ? (
                 <div className={st.sideList__itemsList}>

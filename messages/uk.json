@@ -84,7 +84,9 @@
     "delete": "ВИДАЛИТИ",
     "orderDeletedSuccess": "Замовлення успішно видалено",
     "deleteOrderError": "Не вдалося видалити замовлення",
-    "emptyList": "Список порожній"
+    "emptyList": "Список порожній",
+    "add": "Додати",
+    "addProduct": "Додати товар"
   },
   "NavMenu": {
     "Products": "Товари",

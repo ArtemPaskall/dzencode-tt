@@ -12,6 +12,7 @@ interface Props {
   getUAH: (order: Order) => number | string
   getUSD: (order: Order) => number | string
   t: (key: string) => string
+  isActive: boolean
 }
 
 export default function OrderItem({
@@ -22,9 +23,13 @@ export default function OrderItem({
   getUAH,
   getUSD,
   t,
+  isActive,
 }: Props) {
   return (
-    <div className={st.order__item} onClick={() => onOpen(order.id)}>
+    <div
+      className={`${st.order__item} ${isActive ? st.active : ''}`}
+      onClick={() => onOpen(order.id)}
+    >
       <div className={st.order__itemWrapp}>
         <div className={st.order__title}>{order.title}</div>
 

@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { Order } from '@/types'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { Order, Product } from '@/types'
 
 interface OrdersState {
   items: Order[]
@@ -13,22 +13,28 @@ const initialState: OrdersState = {
   error: null,
 }
 
-type Payload = {
+type RemovePayload = {
   orderId: number
   productId: number
 }
 
-// export const fetchOrders = createAsyncThunk(
-//   'orders/fetchOrders',
-//   async () => {
-//     const res = await fetch('/api/orders')
-//     return await res.json()
-//   }
-// )
+type AddProductsPayload = {
+  orderId: number
+  products: Product[]
+}
 
-export const deleteOrder = createAsyncThunk(
+export const fetchOrders = createAsyncThunk<Order[]>(
+  'orders/fetchOrders',
+  async () => {
+    const res = await fetch('/api/orders')
+    if (!res.ok) throw new Error('Failed to fetch orders')
+    return await res.json()
+  }
+)
+
+export const deleteOrder = createAsyncThunk<number, number>(
   'orders/deleteOrder',
-  async (id: number, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     const res = await fetch(`/api/orders/${id}`, {
       method: 'DELETE',
     })
@@ -42,14 +48,15 @@ export const deleteOrder = createAsyncThunk(
   }
 )
 
-export const removeProductFromOrder = createAsyncThunk(
+export const removeProductFromOrder = createAsyncThunk<
+  RemovePayload,
+  RemovePayload
+>(
   'orders/removeProductFromOrder',
-  async ({ orderId, productId }: Payload, { rejectWithValue }) => {
+  async ({ orderId, productId }, { rejectWithValue }) => {
     const res = await fetch('/api/orders/remove-prod', {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ orderId, productId }),
     })
 
@@ -62,45 +69,79 @@ export const removeProductFromOrder = createAsyncThunk(
   }
 )
 
+export const addProductsToOrderAsync = createAsyncThunk<
+  AddProductsPayload,
+  { orderId: number; productIds: number[]; allProducts: Product[] }
+>(
+  'orders/addProductsToOrderAsync',
+  async ({ orderId, productIds, allProducts }, { rejectWithValue }) => {
+    const res = await fetch('/api/orders/add-products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId, productIds }),
+    })
+
+    if (!res.ok) {
+      const data = await res.json()
+      return rejectWithValue(data.error || 'Add failed')
+    }
+
+    const products = allProducts.filter((p) => productIds.includes(p.id))
+
+    return { orderId, products }
+  }
+)
+
 const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    setOrders(state, action: { payload: Order[] }) {
+    setOrders(state, action: PayloadAction<Order[]>) {
       state.items = action.payload
     },
   },
 
   extraReducers: (builder) => {
     builder
+      // FETCH
+      .addCase(fetchOrders.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchOrders.fulfilled, (state, action) => {
+        state.loading = false
+        state.items = action.payload
+      })
+      .addCase(fetchOrders.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || 'Error'
+      })
 
-      // fetch
-      // .addCase(fetchOrders.pending, (state) => {
-      //   state.loading = true
-      // })
-
-      // .addCase(fetchOrders.fulfilled, (state, action) => {
-      //   state.loading = false
-      //   state.items = action.payload
-      // })
-
-      // .addCase(fetchOrders.rejected, (state, action) => {
-      //   state.loading = false
-      //   state.error = action.error.message || 'Error'
-      // })
-
-      // delete
+      // DELETE ORDER
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.items = state.items.filter((o) => o.id !== action.payload)
       })
 
+      // REMOVE PRODUCT
       .addCase(removeProductFromOrder.fulfilled, (state, action) => {
         const { orderId, productId } = action.payload
 
         const order = state.items.find((o) => o.id === orderId)
 
         if (order) {
-          order.products = order.products.filter((p) => p.id !== productId)
+          order.products = (order.products || []).filter(
+            (p) => p.id !== productId
+          )
+        }
+      })
+
+      //  ADD PRODUCTS
+      .addCase(addProductsToOrderAsync.fulfilled, (state, action) => {
+        const { orderId, products } = action.payload
+
+        const order = state.items.find((o) => o.id === orderId)
+
+        if (order) {
+          order.products = [...(order.products || []), ...products]
         }
       })
   },

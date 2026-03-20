@@ -84,7 +84,9 @@
     "delete": "УДАЛИТЬ",
     "orderDeletedSuccess": "Заказ успешно удалён",
     "deleteOrderError": "Не удалось удалить заказ",
-    "emptyList": "Список пуст"
+    "emptyList": "Список пуст",
+    "add": "Добавить",
+    "addProduct": "Добавить товар"
   },
   "NavMenu": {
     "Products": "Товары",

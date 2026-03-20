@@ -84,7 +84,9 @@
     "delete": "DELETE",
     "orderDeletedSuccess": "Order deleted successfully",
     "deleteOrderError": "Failed to delete order",
-    "emptyList": "List is empty"
+    "emptyList": "List is empty",
+    "add": "Add",
+    "addProduct": "Add Product"
   },
   "NavMenu": {
     "Products": "Products",
