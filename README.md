@@ -76,8 +76,7 @@ Any changes to the product list are reflected and automatically updated across t
 
 ### Deployment and Database
 
-The project is deployed on Railway, and the MySQL database is hosted there as well. The local project connects to the database using external connection settings. Inside Railway, services communicate with the database via an internal port.
-
+The project is deployed on Railway using Docker, and the MySQL database is hosted there as well. The local project connects to the database using external connection settings. Inside Railway, services communicate with the database via an internal port.
 
 ### Database schema in a file:
 
