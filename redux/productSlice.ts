@@ -13,14 +13,6 @@ const initialState: ProductsState = {
   error: null,
 }
 
-// export const fetchProducts = createAsyncThunk(
-//   'products/fetchProducts',
-//   async () => {
-//     const res = await fetch('/api/products')
-//     return await res.json()
-//   }
-// )
-
 export const deleteProduct = createAsyncThunk(
   'products/deleteProduct',
   async (id: number, { rejectWithValue }) => {
@@ -47,27 +39,9 @@ const productsSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder
-
-      // fetch
-      // .addCase(fetchProducts.pending, (state) => {
-      //   state.loading = true
-      // })
-
-      // .addCase(fetchProducts.fulfilled, (state, action) => {
-      //   state.loading = false
-      //   state.items = action.payload
-      // })
-
-      // .addCase(fetchProducts.rejected, (state, action) => {
-      //   state.loading = false
-      //   state.error = action.error.message || 'Error'
-      // })
-
-      // delete
-      .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.items = state.items.filter((p) => p.id !== action.payload)
-      })
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.items = state.items.filter((p) => p.id !== action.payload)
+    })
   },
 })
 

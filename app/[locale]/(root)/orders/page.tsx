@@ -41,8 +41,6 @@ export default async function OrdersPage() {
       ORDER BY o.id;
     `)
 
-    console.log(rows)
-
     const ordersMap = new Map<number, Order>()
 
     rows.forEach((row) => {
@@ -84,8 +82,6 @@ export default async function OrdersPage() {
     })
 
     orders = Array.from(ordersMap.values())
-
-    console.log(orders)
   } catch (error: unknown) {
     console.error(error)
   }

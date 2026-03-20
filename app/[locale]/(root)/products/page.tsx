@@ -24,8 +24,6 @@ export default async function ProductsPage() {
       guarantee_end: new Date(product.guarantee_end).toISOString(),
       date: new Date(product.date).toISOString(),
     }))
-
-    console.log('products', products)
   } catch (error: unknown) {
     throw error
   }

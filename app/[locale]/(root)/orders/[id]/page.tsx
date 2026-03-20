@@ -9,11 +9,8 @@ interface Props {
 }
 
 export default async function OrderPage({ params }: Props) {
-  console.log('params', params)
   const { id } = await params
-  // const id = parseInt(id, 10)
 
-  // Отримуємо замовлення з бази
   const [rows] = await db.query<RowDataPacket[]>(
     'SELECT * FROM orders WHERE id = ?',
     [id]
