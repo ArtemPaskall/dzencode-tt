@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Project
 
-## Getting Started
+This is a test assignment built using [Next.js](https://nextjs.org/).
 
-First, run the development server:
+## Demo
+
+Check out the live demo of the project (deployed on Railway) [HERE](https://dzencode-tt-production.up.railway.app/).
+
+## 🛠 Tech Stack
+
+- Next.js
+- Redux, Redux Toolkit
+- TypeScript
+- SCSS Modules
+- MySql
+- react-hook-form, Zod
+- WebSocket
+- Next-intl
+- Cloudinary
+
+## 🚀 How to Run the Project Locally
+
+Follow these steps to download, install, and run the project on your machine:
 
 ```bash
+# 1. Clone the GitHub repository to your local machine
+git clone https://github.com/ArtemPaskall/dzencode-tt
+
+# 2. Navigate into the project directory
+cd YOUR-REPOSITORY-NAME
+
+# 3. Install all required dependencies from package.json
+npm install
+
+# 4. Place the .env.local file in the root of the project (it is attached in the Telegram working chat)
+
+# 5. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Project Description
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is a Next.js application built using the libraries listed above.
 
-## Learn More
+The header contains:
 
-To learn more about Next.js, take a look at the following resources:
+a counter of active WebSocket connections
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+current date and time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+a language switcher
 
-## Deploy on Vercel
+On the side, there is a menu with the main sections: Products and Orders.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Products
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Products section displays a list of products with all related information, along with a delete button for each item.
+
+It is possible to add new products using a form validated with react-hook-form and Zod.
+There is also an option to upload an image, which is stored in the cloud.
+
+Orders
+
+The Orders section displays a list of orders and allows creating new ones.
+Each order can include products selected from the product list.
+
+Each order contains:
+
+full order details
+
+a delete button (which opens a confirmation modal before deletion)
+
+When clicking on an order, a panel opens on the right side showing the list of products included in that order, with the ability to add and remove products.
+
+Any changes to the product list are reflected and automatically updated across the orders.
