@@ -81,3 +81,9 @@ The project is deployed on Railway using Docker, and the MySQL database is hoste
 ### Database schema in a file:
 
 mydbSchema.mwb
+
+### Video Overview
+
+1 - [Products](https://www.loom.com/share/9e26112c98c14e099bc0c0be6e0bbedc)
+1 - [Orders](https://www.loom.com/share/baf4d9c53c1c44c8a14486a9d64ceaf6)
+1 - [Project Overview](https://www.loom.com/share/52e00bc1dd904cac991d414b2b1594d2)

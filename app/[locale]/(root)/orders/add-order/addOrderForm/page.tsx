@@ -216,7 +216,7 @@ export default function AddOrderForm() {
                         {isSelected && <span className={st.checkmark}>✓</span>}
                       </div>
 
-                      <div>{product.title}</div>
+                      <div className={st.prodTitle}>{product.title}</div>
                       <div>{`${product.price[1].value} $`}</div>
                     </div>
                   )

@@ -37,6 +37,7 @@
     transition: width 0.5s ease-out;
 
     &.shrink {
+      transition: width 0.5s ease-out;
       width: 50%;
 
       .order__title {
@@ -451,11 +452,13 @@
   }
 
   &__addProdButton {
+    text-align: center;
     background-color: #4caf50;
     padding: 5px 10px;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
+    margin-top: 15px;
   }
 
   &__empty {
