@@ -112,6 +112,11 @@
     font-size: 15px;
     font-weight: 500;
     text-decoration: underline;
+
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__serial {
