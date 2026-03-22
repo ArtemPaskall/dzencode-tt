@@ -37,7 +37,7 @@ export default function ProductList({
                   checked={selectedProducts.includes(product.id)}
                   onChange={() => toggleProduct(product.id)}
                 />
-                {product.title}
+                <div>{product.title}</div>
               </label>
             </div>
           ))}
